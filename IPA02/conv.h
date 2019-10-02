@@ -23,20 +23,20 @@ using namespace std;
 class conv
 {
 public:
-  conv();
-  ~conv();
-  bool load_kernal(cv::Mat kernel);
-  void padding(const cv::Mat & source_img,cv::Mat & img_pad,string mod);
-  void convolute(const cv::Mat &image, cv::Mat &dst, string mod);
-  cv::Mat twodConv(const cv::Mat & img,const cv::Mat kernal);
-  cv::Mat gaussKernel(float sig,int m=0);
+	conv();
+	~conv();
+	bool load_kernal(cv::Mat kernel);//加载卷积核
+	void padding(const cv::Mat & source_img, cv::Mat & img_pad, string mod);//边界像素填充
+	void convolute(const cv::Mat &image, cv::Mat &dst, string mod);//
+	cv::Mat twodConv(const cv::Mat & img, const cv::Mat kernal,string mod="zero");//卷积
+	cv::Mat gaussKernel(float sig, int m = 0);//产生归一化二维高斯核
 
 private:
-  void compute_kernal(int i, int j,int chan,cv::Mat &complete_image, cv::Mat &dst);
-  
-  cv::Mat kernal;
-  int pad_x;
-  int pad_y;
+	void compute_kernal(int i, int j, int chan, cv::Mat &complete_image, cv::Mat &dst);//计算每一个像素点卷积后的值
+
+	cv::Mat kernal;
+	int pad_x;//图像一侧边缘增加的x方向的宽度
+	int pad_y;//图像一侧边缘增加的y方向的宽度
 };
 
 #endif // CONV_H

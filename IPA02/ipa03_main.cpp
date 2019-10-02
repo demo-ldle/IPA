@@ -18,54 +18,37 @@ int main(int argc, char **argv) {
    cv::Mat img_out=cv::Mat::zeros(img_in.rows,img_in.cols,img_in.type());
    cv::Mat img_out_opencv=cv::Mat::zeros(img_in.rows,img_in.cols,img_in.type());
 
-//    for (int i = 0; i < gaussK.rows; i++)
-//   {
-//       for (int j = 0; j < gaussK.cols; j++)
-//       {
-// 	  
-// 	  sum += gaussK.ptr<float>(i)[j];
-//       }
-//   }
-//    cout<<"gause:"<<gaussK<<"sum:"<<sum<<endl;
-//    img_out=img_conv.twodConv(img_in,cet_kernal);
-//    cv::filter2D(img_in,img_out_opencv,img_in.depth(),cet_kernal);
-//    
-//    imshow("lena",img_in);
-//    imshow("lena_conv",img_out);
-//    imshow("lena_conv_opencv",img_out_opencv);
-//    cv::waitKey(0);
    
    cv::Mat gaussK;
-//    cv::Mat img_out_gray[4]=cv::Mat::zeros(img_in.rows,img_in.cols,img_in.type());
+   cv::Mat img_out_gray[4]=cv::Mat::zeros(img_in.rows,img_in.cols,img_in.type());
 //    gaussK=img_conv.gaussKernel(1);
 //    img_out_gray[0]=img_conv.twodConv(img_in,gaussK);
-//    imshow("sig1",img_out_gray[0]);
-//    cv::waitKey(10);
+//    imwrite("sig1.tif",img_out_gray[0]);
 //    gaussK=img_conv.gaussKernel(2);
 //    img_out_gray[1]=img_conv.twodConv(img_in,gaussK);
-//    imshow("sig2",img_out_gray[1]);
-//    cv::waitKey(10);
+//    imwrite("sig2.tif",img_out_gray[1]);
+// 
 //    gaussK=img_conv.gaussKernel(3);
 //    img_out_gray[2]=img_conv.twodConv(img_in,gaussK);
-//    imshow("sig3",img_out_gray[2]);
-//    cv::waitKey(10);
+//    imwrite("sig3.tif",img_out_gray[2]);
 //    gaussK=img_conv.gaussKernel(5);
 //    img_out_gray[3]=img_conv.twodConv(img_in,gaussK);
-//    imshow("sig5",img_out_gray[3]);
-//    cv::waitKey(10);
-   
+//    imwrite("sig5.tif",img_out_gray[3]);
+
    gaussK=img_conv.gaussKernel(1);
    img_out=img_conv.twodConv(img_in,gaussK);
-   imshow("sig1_padding",img_out);
-   img_out=img_conv.twodConv(img_in,gaussK);
-   imshow("sig1_zero",img_out);
+   cv::filter2D(img_in,img_out_opencv,img_in.depth(),gaussK);
+   
+   cv::Mat sig1=img_out-img_out_opencv;
+   cv::Mat img_sig1_replicate=cv::Mat::zeros(img_in.rows,img_in.cols,img_in.type());
+   imshow("compare",sig1);
+   //imwrite("sig1_zero.tif",img_out);
+   
+   img_sig1_replicate=img_conv.twodConv(img_in,gaussK,"replicate");
+   img_sig1_replicate=img_out-img_sig1_replicate;
+   imshow("sig1_padding.tif",img_sig1_replicate);
    cv::waitKey(0);
+
 
    return 0;
 }
-// echo "# IPA" >> README.md
-// git init
-// git add README.md
-// git commit -m "first commit"
-// git remote add origin git@github.com:demo-ldle/IPA.git
-// git push -u origin master

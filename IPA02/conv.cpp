@@ -29,7 +29,7 @@ conv::~conv()
 //load conv kernal and detect the window size
 bool conv::load_kernal(cv::Mat kernel_in)
 {
-  cout<<kernel_in<<endl;
+  //cout<<kernel_in<<endl;
  // kernal=kernel_in/(kernel_in.cols*kernel_in.rows);
   kernal=kernel_in;
   if(kernal.cols%2==1&&kernal.rows%2==1){
@@ -195,12 +195,9 @@ void conv::compute_kernal(int i, int j,int chan,cv::Mat &complete_image, cv::Mat
         }
     }
 }
-cv::Mat conv::twodConv(const cv::Mat& img, const cv::Mat kernal)
+cv::Mat conv::twodConv(const cv::Mat& img, const cv::Mat kernal,string mod)
 {
   cv::Mat img_out=cv::Mat::zeros(img.rows,img.cols,img.type());
-  string mod;
-  cout<<"input padding mod:replicate or zero,default zero"<<endl;
-  cin>>mod;
   load_kernal(kernal);
   convolute(img, img_out, mod);
   return img_out;
