@@ -31,7 +31,13 @@ bool conv::load_kernal(cv::Mat kernel_in)
 {
   //cout<<kernel_in<<endl;
  // kernal=kernel_in/(kernel_in.cols*kernel_in.rows);
-  kernal=kernel_in;
+//   kernal=kernel_in;
+  kernal=cv::Mat::zeros(kernel_in.rows,kernel_in.cols,kernel_in.type());
+  for (int i=0;i<kernel_in.rows;i++){
+    for(int j=0;j<kernel_in.cols;j++){
+      kernal.at<float>(i,j)=kernel_in.at<float>(kernel_in.rows-i-1,kernel_in.cols-j-1);
+    }
+  }
   if(kernal.cols%2==1&&kernal.rows%2==1){
     pad_x=(kernal.cols-1)/2;
     pad_y=(kernal.rows-1)/2;
