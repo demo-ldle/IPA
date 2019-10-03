@@ -29,7 +29,7 @@ public:
 	void padding(const cv::Mat & source_img, cv::Mat & img_pad, string mod);//边界像素填充
 	void convolute(const cv::Mat &image, cv::Mat &dst, string mod);//
 	cv::Mat twodConv(const cv::Mat & img, const cv::Mat kernal,string mod="zero");//卷积
-	cv::Mat gaussKernel(float sig, int m = 0);//产生归一化二维高斯核
+	cv::Mat gaussKernel(float sig, int m = -1);//产生归一化二维高斯核
 
 private:
 	void compute_kernal(int i, int j, int chan, cv::Mat &complete_image, cv::Mat &dst);//计算每一个像素点卷积后的值

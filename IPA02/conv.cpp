@@ -211,8 +211,13 @@ cv::Mat conv::twodConv(const cv::Mat& img, const cv::Mat kernal,string mod)
 
 cv::Mat conv::gaussKernel(float sig, int m)
 {
-  if(m==0){
-    m=ceil(sig*3)*2+1;
+  float window_size=ceil(sig*3)*2+1;
+  if(m<window_size&&m!=-1|m%2==0){
+    cout<<"the value m is too small,bigger and odd is appreciated"<<endl;
+    exit(0);
+  }
+  if(m==-1){
+    m=window_size;
   }
   const double PI = 3.14159265358979323846;
   int center = m / 2;

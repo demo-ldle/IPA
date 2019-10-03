@@ -21,19 +21,19 @@ int main(int argc, char **argv) {
    
    cv::Mat gaussK;
    cv::Mat img_out_gray[4]=cv::Mat::zeros(img_in.rows,img_in.cols,img_in.type());
-//    gaussK=img_conv.gaussKernel(1);
-//    img_out_gray[0]=img_conv.twodConv(img_in,gaussK);
-//    imwrite("sig1.tif",img_out_gray[0]);
-//    gaussK=img_conv.gaussKernel(2);
-//    img_out_gray[1]=img_conv.twodConv(img_in,gaussK);
-//    imwrite("sig2.tif",img_out_gray[1]);
-// 
-//    gaussK=img_conv.gaussKernel(3);
-//    img_out_gray[2]=img_conv.twodConv(img_in,gaussK);
-//    imwrite("sig3.tif",img_out_gray[2]);
-//    gaussK=img_conv.gaussKernel(5);
-//    img_out_gray[3]=img_conv.twodConv(img_in,gaussK);
-//    imwrite("sig5.tif",img_out_gray[3]);
+   gaussK=img_conv.gaussKernel(1);
+   img_out_gray[0]=img_conv.twodConv(img_in,gaussK);
+   imwrite("sig1.tif",img_out_gray[0]);
+   gaussK=img_conv.gaussKernel(2);
+   img_out_gray[1]=img_conv.twodConv(img_in,gaussK);
+   imwrite("sig2.tif",img_out_gray[1]);
+
+   gaussK=img_conv.gaussKernel(3);
+   img_out_gray[2]=img_conv.twodConv(img_in,gaussK);
+   imwrite("sig3.tif",img_out_gray[2]);
+   gaussK=img_conv.gaussKernel(5);
+   img_out_gray[3]=img_conv.twodConv(img_in,gaussK);
+   imwrite("sig5.tif",img_out_gray[3]);
 
    gaussK=img_conv.gaussKernel(1);
    img_out=img_conv.twodConv(img_in,gaussK);
