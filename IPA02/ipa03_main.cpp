@@ -37,16 +37,26 @@ int main(int argc, char **argv) {
 
    gaussK=img_conv.gaussKernel(1);
    img_out=img_conv.twodConv(img_in,gaussK);
-   cv::filter2D(img_in,img_out_opencv,img_in.depth(),gaussK);
+   cv::GaussianBlur(img_in, img_out_opencv, cv::Size(gaussK.cols, gaussK.rows),
+                1, 1);
+   //cv::filter2D(img_in,img_out_opencv,img_in.depth(),gaussK);
    
    cv::Mat sig1=img_out-img_out_opencv;
    cv::Mat img_sig1_replicate=cv::Mat::zeros(img_in.rows,img_in.cols,img_in.type());
-   imshow("compare",sig1);
+   //sig=1,opencv和手动实现的高斯滤波的差值图像
+   imshow("MyConvolution_OpenCV",sig1);
    //imwrite("sig1_zero.tif",img_out);
    
+   //比较其他参数条件不变的情况下像素复制和补零下滤波结果在边界上的差别
    img_sig1_replicate=img_conv.twodConv(img_in,gaussK,"replicate");
-   img_sig1_replicate=img_out-img_sig1_replicate;
-   imshow("sig1_padding.tif",img_sig1_replicate);
+   img_sig1_replicate=(img_out-img_sig1_replicate)*1;
+//    for(int i=0;i<img_sig1_replicate.rows;i++){
+//      for (int j=0;j<img_sig1_replicate.cols;j++){
+//        if(img_sig1_replicate.at<uchar>(i,j)!=0)
+// 	 img_sig1_replicate.at<uchar>(i,j)=255;
+//     }
+//   }
+   imshow("replicate_zero",img_sig1_replicate);
    cv::waitKey(0);
 
 
