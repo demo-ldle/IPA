@@ -28,7 +28,12 @@ int main(int argc, char **argv) {
 //       }
 //   }
 //    cout<<"gause:"<<gaussK<<"sum:"<<sum<<endl;
+   if(argc==3){
+     string mod = string(argv[2]);
+     img_out=img_conv.twodConv(img_in,cet_kernal,mod);
+  }else{
    img_out=img_conv.twodConv(img_in,cet_kernal);
+  }
    cv::filter2D(img_in,img_out_opencv,img_in.depth(),cet_kernal);
    
    imshow("lena",img_in);
