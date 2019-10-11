@@ -7,12 +7,14 @@ int main(int argc, char **argv) {
    conv img_conv;
    cv::Mat gaussK;
    if(argc>1){
-     int sig=0;
+     float sig=0;
      int m;
-     cout<<"input sigma:"<<endl;
-     cin>>sig;
-     cout<<"input m:"<<endl;
-     cin>>m;
+     sig=atof(argv[1]);
+     m=atoi(argv[2]);
+     cout<<"input sigma:"<<sig<<endl;
+    // cin>>sig;
+     cout<<"input m:"<<m<<endl;
+    // cin>>m;
      gaussK=img_conv.gaussKernel(sig,m);
     }else{
      gaussK=img_conv.gaussKernel(1);
@@ -26,7 +28,7 @@ int main(int argc, char **argv) {
 	  }
       }
    cout<<"gause:"<<endl<<gaussK<<endl<<"sum of gause kernal :"<<sum<<endl;
-   cin.get();
+ //  cin.get();
 
    return 0;
 }
