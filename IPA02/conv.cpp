@@ -249,7 +249,7 @@ cv::Mat conv::gaussKernel(float sig, int m)
       for (int j = 0; j < m; j++)
       {
 	  
-	  kernal.ptr<float>(i)[j] = kernal.ptr<float>(i)[j];
+	  kernal.ptr<float>(i)[j] = kernal.ptr<float>(i)[j]/sum;
       }
   }
   return kernal;
